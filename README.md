@@ -23,7 +23,7 @@ git clone `https://github.com/FernandoFigueroa0710/passport-authentication.git`
 
 to install packages
 in your terminal 
-`cd passport authentication` 
+`cd passport-authentication` 
 `npm install`
 
 to run the script 
