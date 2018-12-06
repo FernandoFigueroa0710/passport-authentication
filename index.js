@@ -18,7 +18,7 @@ const app = express();
 //Configure our app
 app.use(cors());
 app.use(require("morgan")("dev"));
-app.use(bodyParser.urlencoded({ extend: false }));
+app.use(bodyParser.urlencoded({ extend: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(
@@ -41,10 +41,11 @@ mongoose.set("debug", true);
 //Models and routes
 require("./models/Users");
 require("./config/passport");
+app.use(require("./routes"));
 
 //Error handlers and middleware
 if (!isProduction) {
-  app.use((err, req, res) => {
+  app.use((err, req, res, next) => {
     res.status(err.status || 500);
 
     res.json({
@@ -56,7 +57,7 @@ if (!isProduction) {
   });
 }
 
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
   res.status(err.status || 500);
 
   res.json({
